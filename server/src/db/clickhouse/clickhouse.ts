@@ -1,11 +1,17 @@
 import { createClient } from "@clickhouse/client";
 import { IS_CLOUD } from "../../lib/const.js";
+import { NodeClickHouseClientConfigOptions } from "@clickhouse/client/dist/config.js";
 
-export const clickhouse = createClient({
+let clientConfig: NodeClickHouseClientConfigOptions = {
   url: process.env.CLICKHOUSE_HOST,
   database: process.env.CLICKHOUSE_DB,
   password: process.env.CLICKHOUSE_PASSWORD,
-});
+};
+
+if (process.env?.CLICKHOUSE_USER !== "") {
+  clientConfig.username = process.env.CLICKHOUSE_USER;
+}
+export const clickhouse = createClient(clientConfig);
 
 export const initializeClickhouse = async () => {
   // Create events table
