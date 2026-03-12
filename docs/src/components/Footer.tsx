@@ -156,6 +156,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/features/sessions" className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
+                  {t("Sessions")}
+                </Link>
+              </li>
+              <li>
                 <Link href="/features/retention" className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
                   {t("Retention")}
                 </Link>
