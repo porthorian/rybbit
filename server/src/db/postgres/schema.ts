@@ -178,6 +178,7 @@ export const invitation = pgTable("invitation", {
   // Site access restriction for the invited member
   hasRestrictedSiteAccess: boolean("has_restricted_site_access").default(false).notNull(),
   siteIds: jsonb("site_ids").default([]).$type<number[]>(), // Array of site IDs to grant access to
+  teamIds: jsonb("team_ids").default([]).$type<string[]>(), // Array of team IDs to add the member to
 });
 
 // Member site access junction table - stores which sites a member has access to
@@ -199,6 +200,43 @@ export const memberSiteAccess = pgTable(
     unique("member_site_access_unique").on(table.memberId, table.siteId),
     index("member_site_access_member_idx").on(table.memberId),
     index("member_site_access_site_idx").on(table.siteId),
+  ]
+);
+
+// Team table (BetterAuth)
+export const team = pgTable("team", {
+  id: text().primaryKey(),
+  name: text().notNull(),
+  organizationId: text().notNull().references(() => organization.id, { onDelete: "cascade" }),
+  createdAt: timestamp({ mode: "string" }).notNull(),
+  updatedAt: timestamp({ mode: "string" }),
+});
+
+// Team member table (BetterAuth)
+export const teamMember = pgTable("teamMember", {
+  id: text().primaryKey(),
+  teamId: text().notNull().references(() => team.id, { onDelete: "cascade" }),
+  userId: text().notNull().references(() => user.id, { onDelete: "cascade" }),
+  createdAt: timestamp({ mode: "string" }),
+});
+
+// Team site access junction table - stores which sites belong to a team
+export const teamSiteAccess = pgTable(
+  "team_site_access",
+  {
+    id: serial("id").primaryKey().notNull(),
+    teamId: text("team_id")
+      .notNull()
+      .references(() => team.id, { onDelete: "cascade" }),
+    siteId: integer("site_id")
+      .notNull()
+      .references(() => sites.siteId, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { mode: "string" }).defaultNow().notNull(),
+  },
+  (table) => [
+    unique("team_site_access_unique").on(table.teamId, table.siteId),
+    index("team_site_access_team_idx").on(table.teamId),
+    index("team_site_access_site_idx").on(table.siteId),
   ]
 );
 
