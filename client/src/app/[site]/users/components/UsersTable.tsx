@@ -258,19 +258,13 @@ export function UsersTable() {
         const date = DateTime.fromSQL(info.getValue(), {
           zone: "utc",
         }).setZone(getTimezone());
-        const formattedDate = formatDateTime(date, { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" });
+        const formattedDate = formatDateTime(date, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
         const relativeTime = formatRelativeTime(info.getValue());
 
         return (
           <div className="whitespace-nowrap">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span>{relativeTime}</span>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{formattedDate}</p>
-              </TooltipContent>
-            </Tooltip>
+            <span className="group-hover:hidden">{relativeTime}</span>
+            <span className="hidden group-hover:inline">{formattedDate}</span>
           </div>
         );
       },
@@ -281,19 +275,13 @@ export function UsersTable() {
         const date = DateTime.fromSQL(info.getValue(), {
           zone: "utc",
         }).setZone(getTimezone());
-        const formattedDate = formatDateTime(date, { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit" });
+        const formattedDate = formatDateTime(date, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
         const relativeTime = formatRelativeTime(info.getValue());
 
         return (
           <div className="whitespace-nowrap">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span>{relativeTime}</span>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{formattedDate}</p>
-              </TooltipContent>
-            </Tooltip>
+            <span className="group-hover:hidden">{relativeTime}</span>
+            <span className="hidden group-hover:inline">{formattedDate}</span>
           </div>
         );
       },
@@ -419,7 +407,7 @@ export function UsersTable() {
                   const href = `/${site}/user/${encodeURIComponent(linkId)}`;
 
                   return (
-                    <tr key={row.id} className="border-b border-neutral-100 dark:border-neutral-800 group">
+                    <tr key={row.id} className="border-b border-neutral-100 dark:border-neutral-800 group hover:bg-neutral-50 dark:hover:bg-neutral-850">
                       {row.getVisibleCells().map(cell => (
                         <td key={cell.id} className="px-3 py-3 relative">
                           {/* <Link
