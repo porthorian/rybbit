@@ -22,6 +22,11 @@ export const BASIC_MEMBER_LIMIT = 1;
 export const STANDARD_SITE_LIMIT = 5;
 export const STANDARD_MEMBER_LIMIT = 3;
 
+// API key rate limits per plan (requests per window)
+export const API_RATE_LIMIT_WINDOW = 60_000; // 1 minute
+export const STANDARD_API_RATE_LIMIT = 20; // 20 req/min
+export const PRO_API_RATE_LIMIT = 200; // 200 req/min
+
 export const APPSUMO_SITE_LIMITS: Record<string, number | null> = {
   "1": 3, "2": 10, "3": 25, "4": 50, "5": 100, "6": null,
 };
@@ -233,6 +238,60 @@ const STRIPE_PRICES: StripePlan[] = [
       replays: 2_000_000,
     },
   },
+  {
+    name: "standard30m",
+    priceId: "price_1TC8swDFVprnAny29M5pz5Kl",
+    interval: "month",
+    limits: {
+      events: 30_000_000,
+      replays: 3_000_000,
+    },
+  },
+  {
+    name: "standard30m-annual",
+    priceId: "price_1TC8vZDFVprnAny2gWX5mw5M",
+    interval: "year",
+    limits: {
+      events: 30_000_000,
+      replays: 3_000_000,
+    },
+  },
+  {
+    name: "standard40m",
+    priceId: "price_1TC8yMDFVprnAny233Cfbjb6",
+    interval: "month",
+    limits: {
+      events: 40_000_000,
+      replays: 4_000_000,
+    },
+  },
+  {
+    name: "standard40m-annual",
+    priceId: "price_1TC90CDFVprnAny27ha82pV3",
+    interval: "year",
+    limits: {
+      events: 40_000_000,
+      replays: 4_000_000,
+    },
+  },
+  {
+    name: "standard50m",
+    priceId: "price_1TC911DFVprnAny2148SMHHV",
+    interval: "month",
+    limits: {
+      events: 50_000_000,
+      replays: 5_000_000,
+    },
+  },
+  {
+    name: "standard50m-annual",
+    priceId: "price_1TC91IDFVprnAny2rLGKQzmy",
+    interval: "year",
+    limits: {
+      events: 50_000_000,
+      replays: 5_000_000,
+    },
+  },
   // Pro tiers
   {
     priceId: "price_1S8szIDFVprnAny2Hg7cxG5b",
@@ -376,6 +435,60 @@ const STRIPE_PRICES: StripePlan[] = [
     limits: {
       events: 20_000_000,
       replays: 2_000_000,
+    },
+  },
+  {
+    priceId: "price_1TC8x6DFVprnAny2OCjTzaIG",
+    name: "pro30m",
+    interval: "month",
+    limits: {
+      events: 30_000_000,
+      replays: 3_000_000,
+    },
+  },
+  {
+    priceId: "price_1TC8tnDFVprnAny2u4NkOtOD",
+    name: "pro30m-annual",
+    interval: "year",
+    limits: {
+      events: 30_000_000,
+      replays: 3_000_000,
+    },
+  },
+  {
+    priceId: "price_1TC8yaDFVprnAny2b96SzRYV",
+    name: "pro40m",
+    interval: "month",
+    limits: {
+      events: 40_000_000,
+      replays: 4_000_000,
+    },
+  },
+  {
+    priceId: "price_1TC90YDFVprnAny25SJs1FuX",
+    name: "pro40m-annual",
+    interval: "year",
+    limits: {
+      events: 40_000_000,
+      replays: 4_000_000,
+    },
+  },
+  {
+    priceId: "price_1TC91rDFVprnAny2bLJ8pdUH",
+    name: "pro50m",
+    interval: "month",
+    limits: {
+      events: 50_000_000,
+      replays: 5_000_000,
+    },
+  },
+  {
+    priceId: "price_1TC92BDFVprnAny2uuAeNheH",
+    name: "pro50m-annual",
+    interval: "year",
+    limits: {
+      events: 50_000_000,
+      replays: 5_000_000,
     },
   },
   // Legacy annual price IDs (old 10-month pricing) for backward compatibility

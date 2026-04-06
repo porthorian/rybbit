@@ -11,9 +11,10 @@ export interface FilterStatementOptions {
   // Field name mappings for CTEs that extract fields to different column names
   // e.g., { "url_parameters['utm_source']": "utm_source" }
   fieldMappings?: Record<string, string>;
+
 }
 
-const DEFAULT_SESSION_LEVEL_PARAMS: FilterParameter[] = ["event_name"];
+const DEFAULT_SESSION_LEVEL_PARAMS: FilterParameter[] = ["event_name", "channel"];
 
 const filterTypeToOperator = (type: FilterType) => {
   switch (type) {

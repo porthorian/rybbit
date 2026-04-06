@@ -1,3 +1,4 @@
+import { BackgroundGrid } from "@/components/BackgroundGrid";
 import { CTASection } from "@/components/CTASection";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { HeroSection } from "@/components/HeroSection";
@@ -185,6 +186,7 @@ export function LandingPageTemplate({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <BackgroundGrid />
       <HeroSection title={title} subtitle={subtitle} showEUFlag={showEUFlag} />
 
       {/* Logo Section */}
@@ -197,13 +199,15 @@ export function LandingPageTemplate({
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
             <div className="flex items-center justify-center">
-              <Image
-                src="/logos/tencent.svg"
-                alt="Tencent"
-                width={130}
-                height={40}
-                className="opacity-50 hover:opacity-80 dark:opacity-70 dark:hover:opacity-100 transition-opacity dark:invert grayscale"
-              />
+              <Link href="https://automatio.ai" target="_blank">
+                <Image
+                  src="/logos/automatio.webp"
+                  alt="automatio"
+                  width={130}
+                  height={40}
+                  className="opacity-50 hover:opacity-80 dark:opacity-70 dark:hover:opacity-100 transition-opacity grayscale invert dark:invert-0"
+                />
+              </Link>
             </div>
             <div className="flex items-center justify-center">
               <Image
@@ -262,15 +266,13 @@ export function LandingPageTemplate({
               />
             </div>
             <div className="flex items-center justify-center">
-              <Link href="https://dpm.lol" target="_blank">
-                <Image
-                  src="/logos/dpm.webp"
-                  alt="DPM.lol"
-                  width={120}
-                  height={40}
-                  className="opacity-40 hover:opacity-70 dark:opacity-60 dark:hover:opacity-100 transition-opacity grayscale invert dark:invert-0"
-                />
-              </Link>
+              <Image
+                src="/logos/dpm.webp"
+                alt="DPM.lol"
+                width={120}
+                height={40}
+                className="opacity-40 hover:opacity-70 dark:opacity-60 dark:hover:opacity-100 transition-opacity grayscale invert dark:invert-0"
+              />
             </div>
           </div>
         </div>
