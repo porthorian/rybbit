@@ -1,15 +1,17 @@
 import { createClient } from "@clickhouse/client";
 import { IS_CLOUD } from "../../lib/const.js";
-import { NodeClickHouseClientConfigOptions } from "@clickhouse/client/dist/config.js";
 
-let clientConfig: NodeClickHouseClientConfigOptions = {
+type ClickHouseClientConfigOptions = Parameters<typeof createClient>[0];
+
+let clientConfig: ClickHouseClientConfigOptions = {
   url: process.env.CLICKHOUSE_HOST,
   database: process.env.CLICKHOUSE_DB,
   password: process.env.CLICKHOUSE_PASSWORD,
 };
 
-if (process.env?.CLICKHOUSE_USER !== "") {
-  clientConfig.username = process.env.CLICKHOUSE_USER;
+const clickhouseUser = process.env?.CLICKHOUSE_USER;
+if (clickhouseUser && clickhouseUser.trim() !== "") {
+  clientConfig.username = clickhouseUser;
 }
 export const clickhouse = createClient(clientConfig);
 
